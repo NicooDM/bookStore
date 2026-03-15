@@ -7,7 +7,7 @@ import { BookItem, GoogleBooksResponse } from '../core/models/book.model';
 @Injectable({ providedIn: 'root' })
 export class BookService {
   private http = inject(HttpClient);
-  private apiUrl = environment.baseUrl;
+  private apiUrl = environment.base_url;
 
   /**
    * Busca libros en Google Books API por query (título, autor, etc.)
