@@ -1,0 +1,109 @@
+<main class="container-fluid p-0">
+  <!-- 1. Hero Carousel -->
+  <section id="heroCarousel" class="carousel slide carousel-fade mb-5 shadow-sm" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <!-- Slide 1: Catálogo -->
+      <div class="carousel-item active" style="height: 500px;">
+        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=2000"
+             class="d-block w-100 h-100 object-fit-cover" alt="Libros Recomendados">
+        <div class="carousel-caption d-none d-md-block text-start bg-dark bg-opacity-50 p-4 rounded-4 shadow" style="max-width: 550px; bottom: 15%; left: 8%;">
+          <h1 class="display-4 fw-bold text-white mb-3">Descubre tu Próxima Gran Historia</h1>
+          <p class="fs-5 text-white-50 mb-4">Explora nuestra colección curada de Best Sellers con descuentos exclusivos esta semana.</p>
+          <!-- Redirigimos a una búsqueda genérica para mostrar el catálogo completo -->
+          <a routerLink="/book-store/search" [queryParams]="{q: 'books'}" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm fw-bold">Ver Catálogo</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item" style="height: 500px;">
+        <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&q=80&w=2000"
+             class="d-block w-100 h-100 object-fit-cover" alt="Nuevos Libros">
+        <div class="carousel-caption d-none d-md-block text-start bg-dark bg-opacity-50 p-4 rounded-4 shadow" style="max-width: 550px; bottom: 15%; right: 8%; left: auto;">
+          <h2 class="display-4 fw-bold text-white mb-3">Tu Biblioteca en el Bolsillo</h2>
+          <p class="fs-5 text-white-50 mb-4">Miles de títulos digitales listos para descargar. Lee en cualquier dispositivo, donde quieras.</p>
+          <a routerLink="/book-store/register" class="btn btn-outline-light btn-lg rounded-pill px-5">Crear Cuenta Gratis</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <button class="carousel-control-prev border-0 bg-transparent" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon p-3 bg-dark bg-opacity-25 rounded-circle" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next border-0 bg-transparent" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon p-3 bg-dark bg-opacity-25 rounded-circle" aria-hidden="true"></span>
+    </button>
+  </section>
+
+  <!-- 2. Sección de Beneficios -->
+  <section class="container mb-5">
+    <div class="row g-4 text-center">
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-4 shadow-sm border h-100">
+          <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+            <i class="bi bi-cloud-arrow-down-fill fs-2"></i>
+          </div>
+          <h5 class="fw-bold">Descarga Inmediata</h5>
+          <p class="text-muted small mb-0">Recibe tus eBooks al instante tras completar el pago seguro.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-4 shadow-sm border h-100">
+          <div class="bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+            <i class="bi bi-shield-check-fill fs-2"></i>
+          </div>
+          <h5 class="fw-bold">Pago 100% Seguro</h5>
+          <p class="text-muted small mb-0">Protección SSL avanzada para que tus compras sean totalmente seguras.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-4 shadow-sm border h-100">
+          <div class="bg-warning bg-opacity-10 text-warning rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+            <i class="bi bi-gift-fill fs-2"></i>
+          </div>
+          <h5 class="fw-bold">E-Gift Cards</h5>
+          <p class="text-muted small mb-0">El regalo perfecto: envía una tarjeta digital a tus amigos lectores.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Listados de Libros Dinámicos (Reutilizando ListBook) -->
+  <section class="container mb-5 py-4">
+    <!-- Listado 1: 🔥 Los Más Populares -->
+    <app-list-book 
+      title="🔥 Los Más Populares" 
+      [books]="featuredBooks()"
+      [viewAllLink]="'/book-store/search'">
+      
+    </app-list-book>
+
+    <div class="my-5"></div> <!-- Separador visual -->
+
+    <!-- Listado 2: ✨ Novedades de Ficción -->
+    <app-list-book 
+      title="✨ Novedades de Ficción" 
+      [books]="newArrivals()"
+      [viewAllLink]="'/book-store/search'">
+    </app-list-book>
+  </section>
+
+  <!-- 4. Newsletter -->
+  <section class="bg-primary py-5 text-white mb-n5 rounded-top-5 shadow-lg">
+    <div class="container py-4 text-center">
+        <h2 class="fw-bold mb-3">¿Eres un lector empedernido?</h2>
+        <p class="fs-5 mb-4 opacity-75">Suscríbete y recibe descuentos exclusivos y libros gratis cada mes.</p>
+        <div class="d-flex justify-content-center">
+            <div class="input-group mb-3 shadow" style="max-width: 500px;">
+                <input type="email" class="form-control border-0 px-4 py-3" placeholder="Tu correo electrónico">
+                <button class="btn btn-dark px-4 fw-bold" type="button">Suscribirme</button>
+            </div>
+        </div>
+    </div>
+  </section>
+</main>

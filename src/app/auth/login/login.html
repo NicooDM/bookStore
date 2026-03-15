@@ -1,0 +1,101 @@
+<main class="min-vh-100 d-flex align-items-center justify-content-center bg-light py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5 col-xl-4">
+        
+        <!-- Logo y Título -->
+        <div class="text-center mb-4">
+          <a routerLink="/book-store/home" class="text-decoration-none d-inline-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-book-half text-primary fs-1"></i>
+            <span class="h2 fw-bold text-dark mb-0">Nico<span class="text-primary">Libri</span></span>
+          </a>
+          <h4 class="fw-bold text-dark">¡Hola de nuevo!</h4>
+          <p class="text-muted small px-3">Ingresa tus credenciales para acceder a tu biblioteca digital.</p>
+        </div>
+
+        <!-- Card del Formulario -->
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+          <div class="card-body p-4 p-md-5">
+            
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+              
+              <!-- Email (Floating Label) -->
+              <div class="form-floating mb-3">
+                <input type="email" 
+                       class="form-control bg-light border-0 px-3" 
+                       id="emailInput" 
+                       placeholder="nombre@ejemplo.com"
+                       formControlName="email"
+                       [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                <label for="emailInput" class="text-muted small ms-1">Correo Electrónico</label>
+                <div class="invalid-feedback small px-1">
+                  Ingresa un correo electrónico válido.
+                </div>
+              </div>
+
+              <!-- Password (Floating Label) -->
+              <div class="form-floating mb-3 position-relative">
+                <input type="password" 
+                       class="form-control bg-light border-0 px-3" 
+                       id="passwordInput" 
+                       placeholder="Contraseña"
+                       formControlName="password"
+                       [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                <label for="passwordInput" class="text-muted small ms-1">Contraseña</label>
+                <div class="invalid-feedback small px-1">
+                  La contraseña debe tener al menos 6 caracteres.
+                </div>
+              </div>
+
+              <!-- Opciones adicionales -->
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="form-check">
+                  <input class="form-check-input shadow-none" type="checkbox" id="rememberMe" formControlName="remember">
+                  <label class="form-check-label small text-muted" for="rememberMe">Recordarme</label>
+                </div>
+                <a href="#" class="text-primary text-decoration-none small fw-medium">¿La olvidaste?</a>
+              </div>
+
+              <!-- Botón Ingresar -->
+              <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow mb-4">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+              </button>
+
+              <!-- Divisor -->
+              <div class="d-flex align-items-center mb-4 text-muted small">
+                <hr class="flex-grow-1 opacity-25">
+                <span class="px-3">O continúa con</span>
+                <hr class="flex-grow-1 opacity-25">
+              </div>
+
+              <!-- Redes Sociales -->
+              <div class="d-flex gap-2 mb-4">
+                <button type="button" class="btn btn-outline-light border text-dark w-100 rounded-pill py-2 small fw-medium shadow-sm">
+                  <i class="bi bi-google me-2 text-danger"></i>Google
+                </button>
+                <button type="button" class="btn btn-outline-light border text-dark w-100 rounded-pill py-2 small fw-medium shadow-sm">
+                  <i class="bi bi-facebook me-2 text-primary"></i>Facebook
+                </button>
+              </div>
+
+            </form>
+
+            <!-- Footer del Card -->
+            <div class="text-center">
+              <p class="text-muted small mb-0">¿Eres nuevo aquí? 
+                <a routerLink="/book-store/register" class="text-primary fw-bold text-decoration-none">Regístrate gratis</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Footer debajo del Card -->
+        <p class="text-center text-muted small mt-4 opacity-75">
+          © 2026 NicoLibri • <a href="#" class="text-muted text-decoration-none">Seguridad</a>
+        </p>
+
+      </div>
+    </div>
+  </div>
+</main>

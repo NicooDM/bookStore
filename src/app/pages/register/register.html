@@ -1,0 +1,133 @@
+<main class="min-vh-100 d-flex align-items-center justify-content-center bg-light py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-7 col-lg-6 col-xl-5">
+        
+        <!-- Logo y Título -->
+        <div class="text-center mb-4">
+          <a routerLink="/book-store/home" class="text-decoration-none d-inline-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-book-half text-primary fs-1"></i>
+            <span class="h2 fw-bold text-dark mb-0">Nico<span class="text-primary">Libri</span></span>
+          </a>
+          <h4 class="fw-bold text-dark">Crea tu biblioteca personal</h4>
+          <p class="text-muted small px-4">Únete a miles de lectores y disfruta de tus eBooks favoritos al instante.</p>
+        </div>
+
+        <!-- Card del Formulario -->
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+          <div class="card-body p-4 p-md-5">
+            
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="needs-validation" novalidate>
+              
+              <!-- Nombre Completo -->
+              <div class="form-floating mb-3">
+                <input type="text" 
+                       class="form-control bg-light border-0 px-3" 
+                       id="nameInput" 
+                       placeholder="Tu nombre completo"
+                       formControlName="fullName"
+                       [class.is-invalid]="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched">
+                <label for="nameInput" class="text-muted small ms-1">Nombre Completo</label>
+                <div class="invalid-feedback small px-1">
+                  Tu nombre es necesario (mínimo 3 caracteres).
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="form-floating mb-3">
+                <input type="email" 
+                       class="form-control bg-light border-0 px-3" 
+                       id="emailInput" 
+                       placeholder="nombre@ejemplo.com"
+                       formControlName="email"
+                       [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                <label for="emailInput" class="text-muted small ms-1">Correo Electrónico</label>
+                <div class="invalid-feedback small px-1">
+                  Ingresa un correo electrónico válido.
+                </div>
+              </div>
+
+              <div class="row g-2">
+                <!-- Contraseña -->
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input type="password" 
+                             class="form-control bg-light border-0 px-3" 
+                             id="passwordInput" 
+                             placeholder="Contraseña"
+                             formControlName="password"
+                             [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                      <label for="passwordInput" class="text-muted small ms-1">Contraseña</label>
+                    </div>
+                </div>
+                <!-- Confirmar Contraseña -->
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input type="password" 
+                             class="form-control bg-light border-0 px-3" 
+                             id="confirmInput" 
+                             placeholder="Confirmar"
+                             formControlName="confirmPassword"
+                             [class.is-invalid]="(registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid) || (registerForm.touched && registerForm.errors?.['passwordMismatch'])">
+                      <label for="confirmInput" class="text-muted small ms-1">Repetir</label>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Error de coincidencia de contraseña -->
+              @if (registerForm.touched && registerForm.errors?.['passwordMismatch']) {
+                <div class="alert alert-danger py-2 px-3 small border-0 rounded-pill mb-4 text-center">
+                    <i class="bi bi-exclamation-circle me-1"></i> Las contraseñas no coinciden.
+                </div>
+              }
+
+              <!-- Términos y Condiciones -->
+              <div class="form-check mb-4">
+                <input class="form-check-input shadow-none" type="checkbox" id="termsCheck" required checked>
+                <label class="form-check-label small text-muted" for="termsCheck">
+                  Acepto los <a href="#" class="text-primary text-decoration-none fw-medium">Términos de Servicio</a> y la <a href="#" class="text-primary text-decoration-none fw-medium">Privacidad</a>.
+                </label>
+              </div>
+
+              <!-- Botón Registrarse -->
+              <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold shadow mb-4">
+                <i class="bi bi-person-plus-fill me-2"></i>Crear mi Cuenta
+              </button>
+
+              <!-- Divisor -->
+              <div class="d-flex align-items-center mb-4 text-muted small">
+                <hr class="flex-grow-1 opacity-25">
+                <span class="px-3">O regístrate con</span>
+                <hr class="flex-grow-1 opacity-25">
+              </div>
+
+              <!-- Redes Sociales -->
+              <div class="d-flex gap-2 mb-4">
+                <button type="button" class="btn btn-outline-light border text-dark w-100 rounded-pill py-2 small fw-medium shadow-sm">
+                  <i class="bi bi-google me-2 text-danger"></i>Google
+                </button>
+                <button type="button" class="btn btn-outline-light border text-dark w-100 rounded-pill py-2 small fw-medium shadow-sm">
+                  <i class="bi bi-facebook me-2 text-primary"></i>Facebook
+                </button>
+              </div>
+
+            </form>
+
+            <!-- Footer del Card -->
+            <div class="text-center">
+              <p class="text-muted small mb-0">¿Ya tienes una cuenta? 
+                <a routerLink="/auth/login" class="text-primary fw-bold text-decoration-none">Inicia sesión aquí</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <p class="text-center text-muted small mt-4 opacity-75">
+          © 2026 NicoLibri • Seguridad de Datos SSL
+        </p>
+
+      </div>
+    </div>
+  </div>
+</main>

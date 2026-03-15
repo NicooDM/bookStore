@@ -1,0 +1,78 @@
+<div class="card h-100 border-0 shadow-sm hover-card transition-all rounded-4 overflow-hidden">
+  
+  <!-- Badge de Categoría (Flotante) -->
+  <span class="position-absolute top-0 start-0 badge bg-primary m-3 shadow-sm z-1 py-2 px-3 rounded-pill" style="font-size: 0.7rem;">
+    {{ category() }}
+  </span>
+
+  <!-- Contenedor de Imagen con Efecto Zoom -->
+  <div class="card-img-container overflow-hidden bg-light d-flex align-items-center justify-content-center position-relative" style="height: 280px;">
+    <img [src]="thumbnail()" 
+         [alt]="title()"
+         class="card-img-top object-fit-contain p-4 transition-transform w-100 h-100"
+         loading="lazy">
+    
+    <!-- Overlay al hacer hover (opcional, para dar un toque extra) -->
+    <div class="card-overlay position-absolute w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-10 opacity-0 transition-all">
+       <i class="bi bi-eye text-white fs-1"></i>
+    </div>
+  </div>
+
+  <!-- Cuerpo de la Card -->
+  <div class="card-body d-flex flex-column p-4">
+    
+    <!-- Título con límite de 2 líneas para uniformidad -->
+    <h6 class="card-title fw-bold text-dark mb-1 lh-base text-truncate-2" [title]="title()">
+      {{ title() }}
+    </h6>
+
+    <!-- Autores -->
+    <p class="card-text text-muted small mb-3">
+      {{ authors() }}
+    </p>
+
+    <!-- Rating y Precio -->
+    <div class="mt-auto">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- Rating -->
+        <div class="d-flex align-items-center">
+          @if (rating()) {
+            <span class="text-warning small me-1">
+              <i class="bi bi-star-fill"></i>
+            </span>
+            <span class="fw-bold small text-dark">{{ rating() }}</span>
+          } @else {
+            <span class="text-muted small italic">Sin rating</span>
+          }
+        </div>
+
+        <!-- Precio -->
+        <div class="text-end">
+          @if (price()) {
+            <span class="fw-bold fs-5 text-primary">
+              {{ price()?.amount | currency: price()?.currency }}
+            </span>
+          } @else {
+            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1 fw-bold">
+              GRATIS
+            </span>
+          }
+        </div>
+      </div>
+
+      <!-- Botones de Acción -->
+      <div class="d-flex gap-2">
+        <a [routerLink]="['/book-store/details', book().id]" 
+           class="btn btn-outline-dark btn-sm rounded-pill flex-grow-1 py-2 fw-medium border-2">
+           Ver Detalles
+        </a>
+        <button (click)="addToCart($event)" 
+                class="btn btn-primary btn-sm rounded-pill p-2 d-flex align-items-center justify-content-center shadow-sm" 
+                style="width: 40px; height: 40px;"
+                title="Añadir al carrito">
+          <i class="bi bi-cart-plus fs-5"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

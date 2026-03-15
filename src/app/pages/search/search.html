@@ -1,0 +1,46 @@
+<main class="container py-5 mt-4">
+  <!-- Título de la Búsqueda -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="fw-bold">
+        Resultados para: <span class="text-primary">"{{ currentQuery() }}"</span>
+      </h2>
+      <p class="text-muted small">Hemos encontrado {{ searchResults().length }} libros para ti.</p>
+      <hr class="opacity-10">
+    </div>
+  </div>
+
+  <!-- Estado de Carga -->
+  @if (isLoading()) {
+    <div class="d-flex flex-column align-items-center justify-content-center py-5">
+      <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+        <span class="visually-hidden">Buscando libros...</span>
+      </div>
+      <p class="text-muted fw-medium">Buscando los mejores libros para ti...</p>
+    </div>
+  }
+
+  <!-- Rejilla de Resultados -->
+  @if (!isLoading()) {
+    @if (searchResults().length > 0) {
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 animate__animated animate__fadeIn">
+        @for (book of searchResults(); track book.id) {
+          <div class="col">
+            <!-- Pasamos el libro a tu componente CardBook -->
+            <app-card-book [book]="book"></app-card-book>
+          </div>
+        }
+      </div>
+    } @else {
+      <!-- Sección Sin Resultados -->
+      <div class="text-center py-5 bg-light rounded-4 border">
+        <i class="bi bi-search fs-1 text-muted mb-3 d-block"></i>
+        <h4 class="fw-bold">No encontramos resultados</h4>
+        <p class="text-muted">Intenta con otros términos de búsqueda como el título o autor del libro.</p>
+        <a routerLink="/book-store/home" class="btn btn-primary rounded-pill px-4 mt-2 shadow-sm">
+          Explorar Novedades
+        </a>
+      </div>
+    }
+  }
+</main>

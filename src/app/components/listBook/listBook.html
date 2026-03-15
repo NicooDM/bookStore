@@ -1,0 +1,26 @@
+<div class="row mb-4 border-bottom pb-3 align-items-end">
+  <div class="col-8">
+    <h3 class="fw-bold mb-0 text-dark">{{ title() }}</h3>
+    <p class="text-muted small mb-0">Historias seleccionadas especialmente para ti.</p>
+  </div>
+  @if (showViewAll()) {
+    <div class="col-4 text-end">
+      <a [routerLink]="viewAllLink() " class="btn btn-link text-primary fw-bold text-decoration-none p-0 small">
+        Ver Todo <i class="bi bi-arrow-right ms-1"></i>
+      </a>
+    </div>
+  }
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 animate__animated animate__fadeIn">
+  @for (book of books(); track book.id) {
+    <div class="col">
+      <app-card-book [book]="book"></app-card-book>
+    </div>
+  } @empty {
+    <div class="col-12 py-5 text-center bg-light rounded-4 border">
+       <i class="bi bi-book text-muted fs-1 mb-2 d-block"></i>
+       <p class="text-muted mb-0">Cargando los mejores títulos para ti...</p>
+    </div>
+  }
+</div>

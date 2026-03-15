@@ -1,0 +1,106 @@
+<main class="container py-5 mt-5">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h2 class="fw-bold d-flex align-items-center gap-2">
+        <i class="bi bi-cart3 text-primary"></i>
+        Tu Carrito de Compras
+        <span class="badge bg-light text-dark border ms-2 rounded-pill fw-normal" style="font-size: 0.9rem;">
+          {{ totalItems() }} items
+        </span>
+      </h2>
+      <hr class="opacity-10">
+    </div>
+  </div>
+
+  @if (cartItems().length > 0) {
+    <div class="row g-4 animate__animated animate__fadeIn">
+      <!-- Columna de Productos -->
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+          <div class="list-group list-group-flush">
+            @for (item of cartItems(); track item.id) {
+              <div class="list-group-item p-4 border-bottom border-light">
+                <div class="row align-items-center g-3">
+                  <!-- Portada -->
+                  <div class="col-3 col-md-2">
+                    <img [src]="item.volumeInfo.imageLinks?.thumbnail || 'https://via.placeholder.com/100x150'" 
+                         [alt]="item.volumeInfo.title"
+                         class="img-fluid rounded shadow-sm">
+                  </div>
+                  <!-- Info del Libro -->
+                  <div class="col-7 col-md-8">
+                    <h6 class="fw-bold text-dark mb-1 text-truncate">{{ item.volumeInfo.title }}</h6>
+                    <p class="text-muted small mb-2">{{ item.volumeInfo.authors?.join(', ') || 'Autor desconocido' }}</p>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="badge bg-light text-primary border border-primary-subtle rounded-pill">E-Book</span>
+                      <span class="text-muted small">ID: {{ item.id }}</span>
+                    </div>
+                  </div>
+                  <!-- Precio y Eliminar -->
+                  <div class="col-2 col-md-2 text-end">
+                    <p class="fw-bold text-dark mb-2">
+                      {{ item.saleInfo?.listPrice?.amount | currency: item.saleInfo?.listPrice?.currencyCode }}
+                    </p>
+                    <button (click)="remove(item.id)" class="btn btn-outline-danger btn-sm rounded-circle border-0" title="Eliminar">
+                      <i class="bi bi-trash3"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+          
+          <div class="card-footer bg-white p-3 border-0">
+             <button (click)="clear()" class="btn btn-link text-danger text-decoration-none small p-0">
+                <i class="bi bi-x-circle me-1"></i>Vaciar Carrito
+             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen del Pedido -->
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 bg-light p-4 sticky-top" style="top: 100px;">
+          <h5 class="fw-bold mb-4 border-bottom pb-2">Resumen de Compra</h5>
+          
+          <div class="d-flex justify-content-between mb-3">
+            <span class="text-muted small">Subtotal ({{ totalItems() }} libros)</span>
+            <span class="fw-bold text-dark">{{ totalPrice() | currency: 'USD' }}</span>
+          </div>
+          
+          <div class="d-flex justify-content-between mb-3 text-success">
+            <span class="small">Descuento Cupón</span>
+            <span class="fw-bold">-$0.00</span>
+          </div>
+
+          <hr class="my-4">
+
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <span class="h5 fw-bold mb-0">Total</span>
+            <span class="h4 fw-bold text-primary mb-0">{{ totalPrice() | currency: 'USD' }}</span>
+          </div>
+
+          <a routerLink="/book-store/checkout" class="btn btn-primary btn-lg w-100 rounded-pill py-3 fw-bold shadow-sm mb-3">
+            <i class="bi bi-credit-card-fill me-2"></i>Finalizar Compra
+          </a>
+          
+          <p class="text-center text-muted small mb-0 px-3">
+            <i class="bi bi-shield-lock-fill me-1"></i>Pago 100% Seguro con SSL
+          </p>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- Carrito Vacío -->
+    <div class="text-center py-5 bg-white rounded-5 shadow-sm border mt-4">
+      <div class="bg-light d-inline-flex align-items-center justify-content-center rounded-circle mb-4" style="width: 100px; height: 100px;">
+        <i class="bi bi-cart-x text-muted fs-1"></i>
+      </div>
+      <h3 class="fw-bold">Tu carrito está vacío</h3>
+      <p class="text-muted mb-4">Parece que aún no has añadido ninguna historia a tu colección digital.</p>
+      <a routerLink="/book-store/home" class="btn btn-primary btn-lg rounded-pill px-5 shadow">
+        Explorar la Tienda
+      </a>
+    </div>
+  }
+</main>

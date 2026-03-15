@@ -1,59 +1,36 @@
-# BookStore
+# 📚 bookStore - NicoLibri E-commerce
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.5.
+Bienvenido a **bookStore**, una plataforma de venta de libros digitales moderna y minimalista. Este proyecto nació bajo la marca **NicoLibri** para ofrecer una experiencia de usuario premium, rápida y totalmente reactiva, utilizando las últimas innovaciones de **Angular**.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Demo en Vivo
+Puedes explorar la tienda aquí: [Link de tu proyecto en Vercel]
 
-```bash
-ng serve
-```
+## ✨ Características Destacadas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+* **Arquitectura Moderna:** Basada al 100% en **Standalone Components**.
+* **Gestión de Estado Pro:** Implementación de **Angular Signals** para una reactividad ultra eficiente.
+* **Consumo de API:** Integración completa con **Google Books API** para catálogo y búsquedas.
+* **Persistencia Local:** Carrito de compras sincronizado con el `localStorage` (¡no pierdes tus libros al recargar!).
+* **Diseño Responsive:** Interfaz elegante construida con **Bootstrap 5**, optimizada para móviles y escritorio.
+* **Rutas Optimizadas:** Uso de **Lazy Loading** para mejorar el tiempo de carga inicial.
 
-## Code scaffolding
+## 🛠️ Tecnologías
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* **Angular 18+** (Core)
+* **TypeScript** (Lógica)
+* **Bootstrap 5** (Estilos)
+* **Lucide Icons / Bootstrap Icons** (Iconografía)
+* **Vercel** (Hosting y Despliegue)
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📦 Estructura del Repositorio
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```text
+src/app/
+├── core/         # Servicios (BookService, CartService), Models y Guards.
+├── components/   # Componentes compartidos (Navbar, Footer, BookCard).
+├── pages/        # Vistas principales (Home, Search, Details, Cart).
+└── environments/ # Configuración de API de Google Books.
