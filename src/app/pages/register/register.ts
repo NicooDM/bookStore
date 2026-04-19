@@ -72,7 +72,7 @@ export class Register {
       Swal.fire({
         icon: 'error',
         title: 'Error al registrarse',
-        text: 'usuario o password ya existe!',
+        text: 'El usuario ya existe!',
       });
     }
   }
