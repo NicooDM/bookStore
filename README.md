@@ -56,4 +56,3 @@ El proyecto sigue una estructura limpia y modular:
 Este proyecto está listo para ser desplegado en **Vercel**. Puedes ver la configuración en el archivo `vercel.json` incluido en el repositorio.
 
 ---
-Desarrollado como proyecto de práctica para el dominio de Angular moderno.
