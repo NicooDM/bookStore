@@ -1,13 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<nav class="navbar navbar-expand-lg sticky-top border-bottom shadow-sm">
   <div class="container">
     <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center fw-bold text-primary" routerLink="/book-store/home">
+    <a
+      class="navbar-brand d-flex align-items-center fw-bold text-primary"
+      routerLink="/book-store/home"
+    >
       <i class="bi bi-book-half me-2 fs-3"></i>
       <span>Nico<span class="text-dark">Libri</span></span>
     </a>
 
     <!-- Botón Móvil -->
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -15,51 +23,127 @@
       <!-- Enlaces de Navegación -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
         <li class="nav-item">
-          <a class="nav-link fw-medium" routerLink="/book-store/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+          <a
+            class="nav-link"
+            routerLink="/book-store/home"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >Inicio</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link fw-medium" routerLink="/book-store/search" routerLinkActive="active">Explorar</a>
+          <a 
+            class="nav-link" 
+            routerLink="/book-store/search" 
+            routerLinkActive="active"
+          >Explorar</a>
         </li>
       </ul>
 
       <!-- Buscador -->
-      <form class="d-flex flex-grow-1 mx-lg-4 my-2 my-lg-0" role="search"
-      (submit)="onSearch(searchInput.value); $event.preventDefault()"
-
+      <form
+        class="d-flex flex-grow-1 mx-lg-4 my-2 my-lg-0"
+        role="search"
+        (submit)="onSearch(searchInput.value); $event.preventDefault()"
       >
         <div class="input-group">
-          <input #searchInput class="form-control bg-light border-0" type="search" placeholder="Buscar libros, autores..." aria-label="Search">
-          <button class="btn btn-outline-primary border-0 bg-light" type="submit">
+          <button class="btn border-0 pe-0 text-muted" type="submit">
             <i class="bi bi-search"></i>
           </button>
+          <input
+            #searchInput
+            class="form-control border-0"
+            type="search"
+            placeholder="Buscar libros, autores..."
+            aria-label="Search"
+          />
         </div>
       </form>
 
       <!-- Acciones de Usuario -->
       <div class="d-flex align-items-center gap-3">
         <!-- Carrito -->
-        <a routerLink="/book-store/cart" class="btn btn-light position-relative rounded-circle p-2 text-dark border-0">
+        <a
+          routerLink="/book-store/cart"
+          class="btn-cart position-relative"
+          title="Carrito de compras"
+        >
           <i class="bi bi-cart3 fs-5"></i>
           @if (totalCartItems() > 0) {
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-cart">
               {{ totalCartItems() }}
-              <span class="visually-hidden">libros en el carrito</span>
             </span>
           }
         </a>
 
-        <!-- Perfil / Login -->
+        <!-- Usuario / Cuenta -->
         <div class="dropdown">
-          <a class="btn btn-primary rounded-pill px-4 d-flex align-items-center gap-2 shadow-sm" href="#" role="button" data-bs-toggle="dropdown">
-            <i class="bi bi-person-circle"></i>
-            <span class="d-none d-md-inline">Mi Cuenta</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2 text-center">
-            <li><a class="dropdown-item" routerLink="/auth/login">Iniciar Sesión</a></li>
-            <li><a class="dropdown-item" routerLink="/book-store/register">Registrarse</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" routerLink="/manage-book">Mis Libros</a></li>
-          </ul>
+          @if (authService.currentUser(); as user) {
+            <!-- Estado: Logueado -->
+            <a
+              class="user-profile-toggle dropdown-toggle no-caret"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <div class="avatar-circle">
+                {{ user.name.charAt(0).toUpperCase() }}
+              </div>
+              <span class="d-none d-md-inline fw-medium">Hola, {{ user.name.split(' ')[0] }}</span>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <h6 class="dropdown-header">Mi Cuenta</h6>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/manage-book">
+                  <i class="bi bi-journal-plus"></i> Gestionar Libros
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/book-store/home">
+                  <i class="bi bi-heart"></i> Mis Favoritos
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item text-danger" href="javascript:void(0)" (click)="onLogout()">
+                  <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                </a>
+              </li>
+            </ul>
+          } @else {
+            <!-- Estado: Invitado -->
+            <a
+              class="btn btn-primary rounded-pill px-4 d-flex align-items-center gap-2 shadow-sm fw-medium"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="bi bi-person-circle fs-5"></i>
+              <span>Mi Cuenta</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" routerLink="/auth/login">
+                  <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/book-store/register">
+                  <i class="bi bi-person-plus"></i> Registrarse
+                </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item" routerLink="/manage-book">
+                  <i class="bi bi-journal-text"></i> Mis Libros
+                </a>
+              </li>
+            </ul>
+          }
         </div>
       </div>
     </div>

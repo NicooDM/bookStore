@@ -33,6 +33,13 @@ export class Login {
     const success = this.authService.login(email, password);
     if (success) {
       //success login
+      Swal.fire({
+        icon: 'success',
+
+        title: 'Bienvenido de nuevo!',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       this.router.navigate(['/book-store/home']);
     } else {
       Swal.fire({

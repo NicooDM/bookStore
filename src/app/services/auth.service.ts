@@ -42,7 +42,8 @@ export class AuthService {
     }
     return false; // si no devolvemos el false
   }
-  logout() {
+  
+  logout() { 
     this.currentUser.set(null);
   }
 }
