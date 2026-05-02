@@ -37,7 +37,7 @@ export class Checkout {
         this.cartService.clearCart(); 
         this.isProcessing.set(false);
 
-        // Alerta de éxito profesional con SweetAlert2
+        // Alerta 
         await Swal.fire({
           title: '¡Pago Confirmado!',
           text: 'Gracias por tu compra. Tus eBooks ya están disponibles en tu biblioteca.',

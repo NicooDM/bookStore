@@ -28,10 +28,7 @@ export class Details {
     }
   }
 
-  /**
-   * Reactively fetches the book details based on the ID in the URL.
-   * Using 'switchMap' to cancel previous requests if the ID changes quickly.
-   */
+
   public book = toSignal(
     this.route.paramMap.pipe(
       map(params => params.get('id')),

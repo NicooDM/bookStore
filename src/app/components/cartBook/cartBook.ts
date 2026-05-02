@@ -24,7 +24,7 @@ export default class CartBook {
   }
 
   /**
-   * Vacía el carrito con confirmación profesional usando SweetAlert2.
+   * Vacía el carrito con confirmación usando SweetAlert2.
    */
   public clear(): void {
     Swal.fire({
