@@ -82,4 +82,4 @@ src/app/
 
 ---
 
-Desarrollado con ❤️ por [Tu Nombre] - 2026
+Desarrollado con ❤️ por Nicolas Di Marco - 2026
